@@ -1,19 +1,11 @@
 const { defineConfig } = require("cypress");
+const cucumber = require("cypress-cucumber-preprocessor").default;
 
 module.exports = defineConfig({
   e2e: {
-    // baseUrl: 'https://www.saucedemo.com',
-    env: {
-      facebook_url: 'www.facebook.com',
-      instagram_url: 'www.instagram.com',
-      orangehrm_url: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
-      username: 'Admin',
-      password: 'admin123'
-    },
-    chromeWebSecurity: false,
+    specPattern: "**/*.feature",
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      on("file:preprocessor", cucumber());
     },
-    defaultCommandTimeout: 5000,
   },
 });
